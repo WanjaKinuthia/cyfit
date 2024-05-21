@@ -92,3 +92,13 @@ const submit = () => {
         </form>
     </GuestLayout>
 </template>
+<style>
+    h {
+        color: yellowgreen;
+        
+
+
+    }
+
+
+</style>
