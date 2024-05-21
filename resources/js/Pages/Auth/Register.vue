@@ -11,6 +11,7 @@ const form = useForm({
     email: '',
     password: '',
     password_confirmation: '',
+    role:' '
 });
 
 const submit = () => {
@@ -25,6 +26,16 @@ const submit = () => {
         <Head title="Register" />
 
         <form @submit.prevent="submit">
+            <label for="role">Role</label>
+    <div class="role-select-container">
+        <select id="role" name="role" class="form-control" v-model="form.role">
+            <option value="guest">Guest</option>
+            <option value="admin">Admin</option>
+            <option value="trainer">trainer</option>
+
+        </select>
+    </div>
+
             <div>
                 <InputLabel for="name" value="Name" />
 

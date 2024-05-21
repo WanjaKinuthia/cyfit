@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
-
+use App\Models\Role;
 class RegisteredUserController extends Controller
 {
     /**
@@ -35,13 +35,27 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => 'required|in:guest,admin,trainer',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        // Map role names to role IDs
+    $roleIds = [
+        'guest' => Role::where('name', 'guest')->first()->id,
+        'admin' => Role::where('name', 'admin')->first()->id,
+        'trainer' => Role::where('name', 'trainer')->first()->id,
+    ];
+
+         // Retrieve the selected role ID based on the selected role name
+    $selectedRoleId = $roleIds[$request->input('role')];
+
+    // Create a new user record and assign the selected role ID
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'role_id' => $selectedRoleId, // Assign the selected role ID
+    ]);
+
 
         event(new Registered($user));
 
