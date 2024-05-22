@@ -37,9 +37,9 @@ Route::get('/terry', function () {
     return Inertia::render('Terry');
 })->name('terry');
 
-Route::get('/book', function () {
-    return Inertia::render('Booking/book');
-})->name('book');
+Route::get('/admin', function () {
+    return Inertia::render('Admin');
+})->name('admin');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
