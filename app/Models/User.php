@@ -43,4 +43,61 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function workoutPlans()
+    {
+        return $this->hasMany(WorkoutPlan::class, 'member_id');
+    }
+
+    public function sessions()
+    {
+        return $this->hasMany(Session::class, 'member_id');
+    }
+}
+
+// app/Models/WorkoutPlan.php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class WorkoutPlan extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['trainer_id', 'member_id', 'plan'];
+
+    public function trainer()
+    {
+        return $this->belongsTo(User::class, 'trainer_id');
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(User::class, 'member_id');
+    }
+}
+
+// app/Models/Session.php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Session extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['trainer_id', 'member_id', 'session_time'];
+
+    public function trainer()
+    {
+        return $this->belongsTo(User::class, 'trainer_id');
+    }
+
+    public function member()
+    {
+        return $this->belongsTo(User::class, 'member_id');
+    }
 }
