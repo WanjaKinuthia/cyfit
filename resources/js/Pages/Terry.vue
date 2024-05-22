@@ -44,7 +44,7 @@ import { Head } from '@inertiajs/vue3';
         <div class="px-6 py-4">
           <div class="font-bold text-xl -mt-7 ">book</div>
           <p class="text-white text-base text-center">
-            Join our gym and take advantage of our cross-training programs. Manage your membership by booking sessions and tracking your progress online.
+            Join our gym and take advantage of our dumbbells programs. Manage your membership by booking sessions and tracking your progress online.
           </p>
         </div>
         <div class="px-20 pt-4 pb-2 ml-10">
