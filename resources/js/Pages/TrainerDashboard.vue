@@ -19,6 +19,7 @@ import { Head } from '@inertiajs/vue3';
     </div>
     <div class="actions">
       <button @click="viewClients">View Clients</button>
+      
       <button @click="toggleSessionForm">Schedule Session</button>
     </div>
     <div v-if="showSessionForm" class="session-form">

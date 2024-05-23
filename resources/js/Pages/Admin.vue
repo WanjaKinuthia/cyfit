@@ -1,7 +1,4 @@
-<script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
-</script>
+
 <template>
   <AuthenticatedLayout>
     <div class="container mx-auto p-4">
@@ -34,38 +31,45 @@ import { Head } from '@inertiajs/vue3';
   </AuthenticatedLayout>
   </template>
   
-  <script>
-  export default {
-    data() {
-      return {
-        data: [
-          { id: 1, name: 'John Doe', role: 'Member' },
-          { id: 2, name: 'Jane Smith', role: 'Trainer' },
-          { id: 3, name: 'Sam Johnson', role: 'Member' }
-        ]
-      };
-    },
-    methods: {
-      createItem() {
-        // Logic to create a new item
-        const newItem = { id: this.data.length + 1, name: 'New User', role: 'Member' };
-        this.data.push(newItem);
-      },
-      editItem(item) {
-        // Logic to edit an item
-        const index = this.data.findIndex(i => i.id === item.id);
-        if (index !== -1) {
-          this.data[index].name = prompt('Enter new name', item.name) || item.name;
-          this.data[index].role = prompt('Enter new role', item.role) || item.role;
-        }
-      },
-      deleteItem(id) {
-        this.data = this.data.filter(item => item.id !== id);
+  <script setup>
+import { ref,onMounted } from 'vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+  import { Head } from '@inertiajs/vue3';
+import axios from 'axios';
+
+  onMounted(async()=>{
+    await fetchusers();
+  })
+    const data = ref([ ]);
+
+    const createItem = () => {
+      const newItem = { id: data.value.length + 1, name: 'New User', role: 'Member' };
+      data.value.push(newItem);
+    };
+
+    const editItem = (item) => {
+      const index = data.value.findIndex(i => i.id === item.id);
+      if (index !== -1) {
+        const newName = prompt('Enter new name', item.name) || item.name;
+        const newRole = prompt('Enter new role', item.role) || item.role;
+        data.value[index] = { ...data.value[index], name: newName, role: newRole };
       }
+    };
+
+    const deleteItem = (id) => {
+      data.value = data.value.filter(item => item.id !== id);
+    };
+
+    const fetchusers = async()=>{
+      const dataFetched = await axios.get('http://cyfit.test:8000/api/users');
+      data.value = dataFetched.data;
+
     }
-  };
-  </script>
+   
   
+
+</script>
+ 
   <style scoped>
   /* Scoped styles for this component */
   </style>
