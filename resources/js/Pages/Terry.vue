@@ -53,7 +53,7 @@ const bookSession = async () => {
       </p>
     </div>
     <div class="px-20 pt-4 pb-2 ml-10">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-2">Book Session</button>
+      <button @click="bookSession" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-2">Book Session</button>
     </div>
   </div>
 </div>
@@ -72,7 +72,7 @@ const bookSession = async () => {
       </p>
     </div>
     <div class="px-20 pt-4 pb-2 ml-10 -m-6">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-2">Book Session</button>
+      <button @click="bookSession" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-2">Book Session</button>
     </div>
   </div>
 </div>
