@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\MembershipController;
 
 
 /*
@@ -34,7 +35,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Session routes
 Route::get('/sessions', [SessionController::class, 'index']);
-    Route::get('/trainer/session-members/{id}', [TrainerController::class, 'getSessionMembers']);
-    Route::post('/trainer/workout-plans', [TrainerController::class, 'createWorkoutPlan']);
-    Route::put('/trainer/workout-plans/{id}', [TrainerController::class, 'updateWorkoutPlan']);
-    Route::delete('/trainer/workout-plans/{id}', [TrainerController::class, 'deleteWorkoutPlan']);
+    Route::get('/sessions/session-members/{id}', [SessionController::class, 'show']);
+    Route::post('/sessions/workout-plans', [TrainerController::class, 'store']);
+    Route::put('/trainer/workout-plans/{id}', [TrainerController::class, 'update']);
+    Route::delete('/trainer/workout-plans/{id}', [TrainerController::class, 'destroy']);
+
+    Route::get('/membership', [MembershipController::class, 'index']);
+    Route::post('/membership', [TrainerController::class, 'store']);
