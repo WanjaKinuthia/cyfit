@@ -1,6 +1,27 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import {ref,onMounted} from 'vue';
+import axios from 'axios';
+// http://cyfit.test:8000/api/sessions
+
+onMounted(async()=>{
+   await fetchSessions();
+})
+const sessions = ref([]);
+const fetchSessions = async()=>{
+  try {
+    const response = await axios.get('/api/sessions');
+    sessions.value = response.data;
+    // console.log(sessions.value);
+
+
+  } catch(error){
+    console.log(' Failed to fetch Session Types');
+  }
+
+
+}
 </script>
 <template>
   <AuthenticatedLayout>
@@ -29,9 +50,9 @@ import { Head } from '@inertiajs/vue3';
         <input type="date" id="sessionDate" v-model="sessionDate" required>
         <label for="sessionType">Session Type:</label>
         <select id="sessionType" v-model="sessionType" required>
-          <option value="Strength Training">Strength Training</option>
-          <option value="Cardio">Cardio</option>
-          <option value="Flexibility">Flexibility</option>
+        
+          <option v-for="session in sessions" :key="session.id">{{ session.session_type }}</option>
+          
           <!-- Add more options as needed -->
         </select>
         <div class="form-actions">
