@@ -9,12 +9,13 @@ onMounted(async()=>{
    await fetchSessions();
 })
 const sessions = ref([]);
+
 const fetchSessions = async()=>{
   try {
     const response = await axios.get('/api/sessions');
-    sessions.value = response.data;
-    // console.log(sessions.value);
+    //  assigned the fetched data to sessions varible
 
+    sessions.value = response.data;
 
   } catch(error){
     console.log(' Failed to fetch Session Types');
@@ -50,7 +51,8 @@ const fetchSessions = async()=>{
         <input type="date" id="sessionDate" v-model="sessionDate" required>
         <label for="sessionType">Session Type:</label>
         <select id="sessionType" v-model="sessionType" required>
-        
+
+        <!-- we loop through the sessions fetched -->
           <option v-for="session in sessions" :key="session.id">{{ session.session_type }}</option>
           
           <!-- Add more options as needed -->

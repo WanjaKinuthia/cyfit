@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            // Add more columns that reference sessions
-            $table->foreignId('session_type_id')->constrained('sessions');
-            $table->foreignId('session_price_id')->constrained('sessions');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('session_id')->constrained('sessions');
             $table->timestamps();
         });
     }

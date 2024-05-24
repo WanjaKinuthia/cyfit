@@ -23,15 +23,16 @@ class MembershipController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'membership_type' => 'required|in:Premium Membership,Group Membership,Corporate Membership,Individual Membership',
+            'type' => 'required|string',
+            'price' => 'required|numeric',
         ]);
-        
-        $membership = Membership::create([
-            
-            'membership_type' => $request->membership_type,
-        ]);
-        // returns json date:
-        return response()->json($membership_type);
+    
+        $membership = new Membership();
+        $membership->type = $request->input('type');
+        $membership->price = $request->input('price');
+        $membership->save();
+    
+        return response()->json(['message' => 'Membership created successfully'], 201);
     }
 
     /**
