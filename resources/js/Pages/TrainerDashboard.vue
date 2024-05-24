@@ -5,10 +5,30 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
 const trainerName = ref('Fred');
-const showSessionForm = ref(false);
-const sessionDate = ref('');
-const sessionType = ref('Strength Training');
+
+
 const sessions = ref([]);
+const totalMemberships = ref(0);
+const totalsessions = ref(0);
+
+
+const fetchTotalMemberships = async () => {
+  try {
+    const response = await axios.get('/api/totalmembership');
+    totalMemberships.value = response.data;
+  } catch (error) {
+    console.error('error fetching total memberships', error);
+  }
+};
+
+const fetchtotalsessions = async () => {
+  try {
+    const response = await axios.get('/api/sessions/totalsessions')
+    totalsessions.value = response.data;
+  } catch (error) {
+    console.error('error fetching total sessions', error);
+  }
+};
 
 const fetchSessions = async () => {
   try {
@@ -19,19 +39,9 @@ const fetchSessions = async () => {
   }
 };
 
-const toggleSessionForm = () => {
-  showSessionForm.value = !showSessionForm.value;
-};
 
-const submitSession = () => {
-  console.log('Session created:', sessionDate.value, sessionType.value);
-  sessionDate.value = '';
-  sessionType.value = 'Strength Training';
-};
 
-const deleteSession = () => {
-  console.log('Session deleted');
-};
+
 
 const updateSession = () => {
   console.log('Session updated');
@@ -39,6 +49,9 @@ const updateSession = () => {
 
 onMounted(async () => {
   await fetchSessions();
+  fetchTotalMemberships();
+  fetchtotalsessions();
+
 });
 </script>
 
@@ -46,27 +59,39 @@ onMounted(async () => {
   <AuthenticatedLayout>
     <div class="trainer-dashboard">
       <h1>Welcome, {{ trainerName }}</h1>
-      <div class="actions">
-        <button @click="toggleSessionForm">Schedule Session</button>
-      </div>
-      <div v-if="showSessionForm" class="session-form">
-        <h2>Schedule Workout Session</h2>
-        <form @submit.prevent="submitSession">
-          <label for="sessionDate">Session Date:</label>
-          <input type="date" id="sessionDate" v-model="sessionDate" required>
-          <label for="sessionType">Session Type:</label>
-          <select id="sessionType" v-model="sessionType" required>
-            <option v-for="session in sessions" :key="session.id">
-              {{ session.session_type }}
-            </option>
-          </select>
-          <div class="form-actions">
-            <button type="submit">Create</button>
-            <button @click="deleteSession">Delete</button>
-            <button @click="updateSession">Update</button>
+      
+
+
+      
+
+
+
+
+      <div class="bg-white shadow overflow-hidden sm:rounded-lg p-6">
+          <h3 class="text-lg font-medium text-gray-900 mb-4">Total Clients</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="bg-orange-100 p-6 rounded-lg shadow text-center">
+              <div class="text-3xl font-bold" @click="toggleAllIssues" style="cursor: pointer">{{totalMemberships}}</div>
+              <div class="text-gray-600">All Memberships </div>
+            </div>
+
+            <div class="bg-orange-100 p-6 rounded-lg shadow text-center">
+              <a href="/sessions" >
+              <div class="text-3xl font-bold" @click="toggleAllIssues" style="cursor: pointer">{{totalsessions}}</div>
+              <div class="text-gray-600">All sessions </div>
+              </a>
+            </div>
+            <!-- Add similar blocks for other metrics -->
           </div>
-        </form>
-      </div>
+        </div>
+
+     
+
+
+
+
+
+
     </div>
   </AuthenticatedLayout>
 </template>

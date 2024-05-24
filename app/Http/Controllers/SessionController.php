@@ -21,14 +21,15 @@ class SessionController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'date' => 'required',
-            'session_type' => 'required|in:cardio,strength_training,flexibility',
+            'session_type' => 'required',
         ]);
 
         // create
         $session = Session::create([
-            ' date'=> $request->date,
+            'session_date'=> $request->date,
             
             'session_type' => $request->session_type,
         ]);
@@ -53,12 +54,14 @@ class SessionController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'date' => 'required',
-            'session_type' => 'required|in:cardio,strength_training,flexibility',
+            'session_date' => 'required',
+            'session_type' => 'required'
         ]);
 
         // 
-        $session = Session::update($request->all());
+        $session = Session::find($id);
+        $session->update($request->all());
+        
 
         return response()->json($session);
       
@@ -78,5 +81,12 @@ class SessionController extends Controller
             return response()->json(['message' => 'Session not found.']);
         }
         
+    }
+
+    public function totalsessions()
+    {
+        $total = Session::count();
+
+        return response()->json($total);
     }
 }

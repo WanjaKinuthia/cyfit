@@ -41,6 +41,11 @@ Route::get('/admin', function () {
     return Inertia::render('Admin');
 })->name('admin');
 
+//sessions
+Route::get('/sessions', function () {
+    return Inertia::render('sessions');
+})->name('sessions');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

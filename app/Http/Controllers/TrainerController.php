@@ -12,6 +12,7 @@ class TrainerController extends Controller
     public function getMembers()
     {
         $members = User::where('role', 'member')->get();
+
         return response()->json($members);
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\TotalMembershipController;
 use App\Http\Controllers\BookingsController;
 
 
@@ -37,6 +38,14 @@ Route::middleware('auth:sanctum')->group(function () {
 // Session routes
 Route::get('/sessions', [SessionController::class, 'index']);
     Route::get('/sessions/session-members/{id}', [SessionController::class, 'show']);
+    Route::post('/sessions', [SessionController::class, 'store']);
+    Route::delete('/sessions/{id}', [SessionController::class, 'destroy']);
+    Route::get('/sessions/totalsessions', [SessionController::class, 'totalsessions']);
+    //update
+    Route::put('/sessions/{id}', [SessionController::class, 'update']);
+
+
+    
     
     Route::post('/sessions/workout-plans', [TrainerController::class, 'store']);
     Route::put('/trainer/workout-plans/{id}', [TrainerController::class, 'update']);
@@ -47,6 +56,10 @@ Route::get('/sessions', [SessionController::class, 'index']);
 
     Route::get('/booking', [BookingsController::class, 'index']);
     Route::post('/booking', [BookingsController::class, 'store']);
+
+    Route::get('/totalmembership', [TotalMembershipController::class, 'index']);
+
+
 
 
     Route::get('/booking/{id}', [BookingsController::class, 'update']);
