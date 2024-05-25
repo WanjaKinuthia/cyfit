@@ -52,6 +52,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Session::class, 'member_id');
     }
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
 }
 
 // app/Models/WorkoutPlan.php

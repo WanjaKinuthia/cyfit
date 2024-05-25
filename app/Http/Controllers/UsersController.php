@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Support\Facades\Auth;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 
 class UsersController extends Controller
 {
@@ -13,7 +14,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::with('role')->get();
         return response()->json($users);
     }
 
@@ -25,32 +26,28 @@ class UsersController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => 'required|in:guest,admin,trainer',
+            //'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role_id' => 'required',
         ]);
 
         // Map role names to role IDs
-    $roleIds = [
-        'guest' => Role::where('name', 'guest')->first()->id,
-        'admin' => Role::where('name', 'admin')->first()->id,
-        'trainer' => Role::where('name', 'trainer')->first()->id,
-    ];
+   
 
          // Retrieve the selected role ID based on the selected role name
-    $selectedRoleId = $roleIds[$request->input('role')];
+    $password = \Str::random(8);
 
     // Create a new user record and assign the selected role ID
     $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
-        'password' => Hash::make($request->password),
-        'role_id' => $selectedRoleId, // Assign the selected role ID
+        'password' => \Hash::make($password),
+        'role_id' => $request->role_id, // Assign the selected role ID
     ]);
 
 
-        event(new Registered($user));
+        //event(new Registered($user));
 
-        Auth::login($user);
+        auth()->login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
@@ -68,7 +65,11 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       
+        $user = User::find($id);
+        $user->update($request->all());
+        return response()->json(['message' => 'User updated successfully.'], 200);
+        
     }
 
     /**
@@ -78,7 +79,7 @@ class UsersController extends Controller
     {
         $user = User::find($id);
 
-        if ($user) {
+        if ($user && user->id !== auth()->user()-id) {
             $user->delete();
             return response()->json(['message' => 'User deleted successfully.'], 200);
         } else {

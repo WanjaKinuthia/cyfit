@@ -25,7 +25,13 @@ class AdminEntryController extends Controller
     */
     public function create()
     {
-        return view('admin_entries.create');
+        $request->validate([
+            'name' => $request->name,
+            'email' => $request->email,
+            
+            'role_id' => $selectedRoleId,
+        ]);
+        return response()->json($session);
     }
 
     /**

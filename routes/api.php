@@ -8,6 +8,8 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\TotalMembershipController;
 use App\Http\Controllers\BookingsController;
+use App\Http\Controllers\RolesController;
+
 
 
 /*
@@ -21,7 +23,10 @@ use App\Http\Controllers\BookingsController;
 |
 */
 Route::get('/users', [UsersController::class,'index']);
-Route::delete('/users', [UsersController::class, 'destroy']);
+
+Route::put('/users/{id}', [UsersController::class,'update']);
+Route::post('/users', [UsersController::class,'store']);
+Route::delete('/users/{id}', [UsersController::class, 'destroy']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -64,3 +69,7 @@ Route::get('/sessions', [SessionController::class, 'index']);
 
     Route::get('/booking/{id}', [BookingsController::class, 'update']);
     Route::delete('/booking/workout-plans/{id}', [BookingsController::class, 'destroy']);
+
+
+    Route::get('/roles', [RolesController::class, 'index']);
+    Route::post('/roles', [RolesController::class, 'store']);
