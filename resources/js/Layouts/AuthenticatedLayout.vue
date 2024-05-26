@@ -40,8 +40,8 @@ const showingNavigationDropdown = ref(false);
                                   Trainer
                                 </NavLink>
 
-                                <NavLink :href="route('terry')" class="text-white">
-                                  Terry
+                                <NavLink :href="route('Purchase Plan')" class="text-white">
+                                  PurchasePlans
                                 </NavLink>
 
                                

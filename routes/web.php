@@ -33,9 +33,9 @@ Route::get('/trainer', function () {
     return Inertia::render('TrainerDashboard');
 })->name('trainer');
 
-Route::get('/terry', function () {
-    return Inertia::render('Terry');
-})->name('terry');
+Route::get('/Purchase Plan', function () {
+    return Inertia::render('Purchase Plan');
+})->name('Purchase Plan');
 
 
 

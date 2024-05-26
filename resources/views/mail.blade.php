@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Notification</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body style="background-color: #f7fafc; padding: 2rem; font-family: Arial, sans-serif;">
+<body class="bg-gray-100 p-8 font-sans">
 
-    <div style="max-width: 28rem; margin: auto; background-color: #ffffff; border-radius: 0.5rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); overflow: hidden;">
-        <div style="padding: 1.5rem;">
-            <h1 style="font-size: 1.5rem; font-weight: bold; color: #2d3748; margin-bottom: 1rem;">Hello {{ $user->name }}</h1>
-            <p style="color: #4a5568; margin-bottom: 1rem;">Your Cyfit email has been created successfully.</p>
-            <p style="color: #4a5568; margin-bottom: 1rem;">Your password is: <span style="font-weight: bold; color: #2d3748;">{{ $password }}</span></p>
-            <p style="color: #4a5568;">Thank you. Regards, Cyfit.</p>
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-6">
+            <h1 class="text-2xl font-bold text-gray-800 mb-4">Hello {{ $user->name }}</h1>
+            <p class="text-gray-600 mb-4">Your Cyfit email has been created successfully.</p>
+            <p class="text-gray-600 mb-4">Your password is: <span class="font-bold text-gray-800">{{ $password }}</span></p>
+            <p class="text-gray-600">Thank you. Regards, Cyfit.</p>
         </div>
     </div>
 
