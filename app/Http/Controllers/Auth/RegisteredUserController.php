@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
     $roleIds = [
         'guest' => Role::where('name', 'guest')->first()->id,
         'admin' => Role::where('name', 'admin')->first()->id,
-        'trainer' => Role::where('name', 'trainer')->first()->id,
+        //'trainer' => Role::where('name', 'trainer')->first()->id,
     ];
 
          // Retrieve the selected role ID based on the selected role name

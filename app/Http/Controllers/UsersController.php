@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Support\Facades\Auth;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use App\Mail\UserCreated;
+use Illuminate\Support\Facades\Mail;
+
+
 
 class UsersController extends Controller
 {
@@ -35,6 +39,7 @@ class UsersController extends Controller
 
          // Retrieve the selected role ID based on the selected role name
     $password = \Str::random(8);
+   
 
     // Create a new user record and assign the selected role ID
     $user = User::create([
@@ -43,6 +48,7 @@ class UsersController extends Controller
         'password' => \Hash::make($password),
         'role_id' => $request->role_id, // Assign the selected role ID
     ]);
+    Mail::to($user)->send(new UserCreated($user,$password));
 
 
         //event(new Registered($user));

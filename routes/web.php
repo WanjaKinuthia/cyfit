@@ -37,9 +37,7 @@ Route::get('/terry', function () {
     return Inertia::render('Terry');
 })->name('terry');
 
-Route::get('/admin', function () {
-    return Inertia::render('Admin');
-})->name('admin');
+
 
 //sessions
 Route::get('/sessions', function () {
@@ -51,5 +49,18 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+//admin
+Route::get('/admin', function () {
+    return Inertia::render('Admin');
+})->middleware(['auth', 'role_id:1'])->name('admin');
+
+//trainer
+Route::get('/trainer', function () {
+    return Inertia::render('TrainerDashboard');
+})->middleware(['auth', 'role_id:2'])->name('trainer');
+
+
+
+
 
 require __DIR__.'/auth.php';

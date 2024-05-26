@@ -2,7 +2,9 @@
 <template>
   <AuthenticatedLayout>
     <div class="container mx-auto p-4">
-      <h2 class="text-2xl font-bold mb-4">Manage Memberships and Trainers</h2>
+      <h2  v-if="!editting" class="text-2xl font-bold text-red-600 mb-9 ml-40">Add Users and Trainers</h2>
+      <h2  v-else class="text-2xl font-bold text-red-600 mb-9 ml-40">Edit Users and Trainers</h2>
+      
       <div class="overflow-x-auto">
       <div v-if="showform==false" >
         <button @click="showform = true" class="bg-green-500 text-white px-4 py-2 mt-4 rounded">Create New Entry</button>
@@ -24,7 +26,7 @@
               <td class="py-2 px-4 border-b">{{ item.email }}</td>
               <td class="py-2 px-4 border-b">{{ item.role ? item.role.name : '' }}</td>
               <td class="py-2 px-4 border-b">
-                <button @click="editItem(item)" class="bg-blue-500 text-white px-2 py-1 rounded mr-2">Edit</button>
+                <button @click="editItem(item)" class="bg-blue-500 text-white px-2 py-1 rounded mr-4">Edit</button>
                 <button @click="deleteItem(item.id)" class="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
               </td>
             </tr>
@@ -33,7 +35,7 @@
       </div>
 
 <div v-else>
-  <h2 class="text-2xl font-bold mb-4">Add User</h2>
+ 
 <form @submit.prevent=" editting ? edituser():  createItem()" class="max-w-sm mx-auto">
   <div class="mb-5">
     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Name</label>
@@ -52,7 +54,7 @@
 
   </div>
   
-  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mr-4">Submit</button>
   <button  @click="hideform" type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-red-800">Cancel</button>
 
 </form>
