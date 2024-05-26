@@ -48,20 +48,21 @@ onMounted(async () => {
           <div class="font-bold text-white text-xl mb-2">{{session.session_type}}</div>
           <p class="text-white text-base text-center">{{ session.description }}</p>
         </div>
+
         <div class="px-20 pt-4 pb-2 ml-15">
+          
+
           <select v-model="selectedMembership" id="membershipType" class="bg-gray-800 text-white font-bold py-2 px-4 rounded-full mb-4">
-            <option value="Premium Membership">Premium Membership</option>
-            <option value="Group Membership">Group Membership</option>
-            <option value="Corporate Membership">Corporate Membership</option>
-            <option value="Individual Membership">Individual Membership</option>
+            <option value =""></option>
+            <option value="Premium Membership">Premium Membership -30,000</option>
+            <option value="Group Membership">Group Membership  -10,000</option>
+            <option value="Corporate Membership">Corporate Membership -5,000</option>
+            <option value="Individual Membership">Individual Membership -15,000</option>
           </select>
 
-          <select v-model="selectedPrice" id="price" class="bg-gray-800 text-white font-bold py-2 px-4 rounded-full mb-4">
-            <option value="20000">20000</option>
-            <option value="5000">5000</option>
-            <option value="15000">15000</option>
-            <option value="10000">10000</option>
-          </select>
+
+           
+         
 
           <button @click="storeSession" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-2">
             Purchase Plan

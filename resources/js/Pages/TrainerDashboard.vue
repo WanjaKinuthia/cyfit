@@ -4,7 +4,7 @@ import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
-const trainerName = ref('Fred');
+const trainerName = ref('');
 
 
 const sessions = ref([]);
@@ -58,7 +58,7 @@ onMounted(async () => {
 <template>
   <AuthenticatedLayout>
     <div class="trainer-dashboard">
-      <h1>Welcome, {{ trainerName }}</h1>
+      <h1>Welcome {{ trainerName }}</h1>
       
 
 

@@ -1,6 +1,9 @@
 <template>
       <AuthenticatedLayout>
-        <div><h3>sessions</h3></div>
+      
+  <h3 class="font-bold  text-red-500 ml-10">sessions</h3>
+
+
 
         <div class="actions">
         <button @click="toggleSessionForm">Schedule Session</button>

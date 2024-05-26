@@ -13,7 +13,7 @@ const showingNavigationDropdown = ref(false);
 <template>
     <div>
         <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+            <nav class="bg-emerald-900 border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -28,19 +28,19 @@ const showingNavigationDropdown = ref(false);
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                            <div class="hidden  space-x-8 sm:-my-px sm:ms-10 sm:flex ">
+                                <NavLink :href="route('dashboard')" :active="route().current('dashboard') " class="text-white">
                                     Dashboard
                                 </NavLink>
-                                <NavLink :href="route('admin')" >
+                                <NavLink :href="route('admin')"  class="text-white">
                                    Admin
                                 </NavLink>
 
-                                <NavLink :href="route('trainer')" >
+                                <NavLink :href="route('trainer')" class="text-white" >
                                   Trainer
                                 </NavLink>
 
-                                <NavLink :href="route('terry')" >
+                                <NavLink :href="route('terry')" class="text-white">
                                   Terry
                                 </NavLink>
 
@@ -135,9 +135,9 @@ const showingNavigationDropdown = ref(false);
                     </div>
 
                     <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200">
-                        <div class="px-4">
-                            <div class="font-medium text-base text-gray-800">
+                    <div class="pt-4 pb-1 border-t border-gray-200 ">
+                        <div class="px-4 bg-emerald-900">
+                            <div class="font-medium text-base text-gray-800 ">
                                 {{ $page.props.auth.user.name }}
                             </div>
                             <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>

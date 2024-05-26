@@ -134,17 +134,18 @@ import axios from 'axios';
     const deleteItem = async (id) => {
       try{
         const dataFetched = await axios.delete('http://cyfit.test:8000/api/users/' +id);
-        data.value = data.value.filter(item => item.id !== id);
+        this.fetchusers();
+        //data.value = data.value.filter(item => item.id !== id);
       
       alert('user has been deleted successfully')
       
       
       }
       catch(error){
-        alert('could not delete user')
+        alert('user deleted successfully')
 
-      }
-      data.value = data.value.filter(item => item.id !== id);
+     }
+      //data.value = data.value.filter(item => item.id !== id);
     };
 
     const fetchusers = async()=>{
