@@ -31,7 +31,7 @@ class UsersController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             //'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role_id' => 'required',
+            //'role_id' => 'required',
         ]);
 
         // Map role names to role IDs
