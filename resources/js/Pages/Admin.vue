@@ -97,7 +97,7 @@ import axios from 'axios';
 // Method to create a new user
     const createItem = async () => {
       try{
-        const dataFetched = await axios.post('http://cyfit.test:8000/api/users',{name:name.value, email:email.value, role_id:role_id.value});
+        const dataFetched = await axios.post('/api/users',{name:name.value, email:email.value, role_id:role_id.value});
       const newItem = { id: data.value.length + 1, name: name.value, role: roles.value.find(role => role.id == role_id.value).name };
       data.value.push(newItem);
       alert('user has been created successfully')
@@ -141,7 +141,7 @@ import axios from 'axios';
 
     const deleteItem = async (id) => {
       try{
-        const dataFetched = await axios.delete('http://cyfit.test:8000/api/users/' +id);
+        const dataFetched = await axios.delete('/api/users/' +id);
         this.fetchusers();
         //data.value = data.value.filter(item => item.id !== id);
       
@@ -157,20 +157,20 @@ import axios from 'axios';
     };
 
     const fetchusers = async()=>{
-      const dataFetched = await axios.get('http://cyfit.test:8000/api/users');
+      const dataFetched = await axios.get('/api/users');
       data.value = dataFetched.data;
 
     }
 
     const fetchroles = async()=>{
-      const dataFetched = await axios.get('http://cyfit.test:8000/api/roles');
+      const dataFetched = await axios.get('/api/roles');
       roles.value = dataFetched.data;
 
     }
 
     const edituser = async () => {
       try{
-        const dataFetched = await axios.put('http://cyfit.test:8000/api/users/'+userid.value,{name:name.value, email:email.value, role_id:role_id.value});
+        const dataFetched = await axios.put('/api/users/'+userid.value,{name:name.value, email:email.value, role_id:role_id.value});
       const newItem = { id: userid.value, name: name.value, role: roles.value.find(role => role.id == role_id.value).name };
       data.value = data.value.filter(user => user.id != userid.value)
       data.value.push(newItem);
