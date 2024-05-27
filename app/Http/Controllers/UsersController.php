@@ -46,7 +46,7 @@ class UsersController extends Controller
         'name' => $request->name,
         'email' => $request->email,
         'password' => \Hash::make($password),
-        'role_id' => $request->role_id, // Assign the selected role ID
+        'role_id' => 3 // Assign the selected role ID
     ]);
     Mail::to($user)->send(new UserCreated($user,$password));
 
