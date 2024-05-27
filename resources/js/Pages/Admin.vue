@@ -2,13 +2,15 @@
 <template>
   <AuthenticatedLayout>
     <div class="container mx-auto p-4">
+      <!-- Header for adding or editing users and trainers -->
       <h2  v-if="!editting" class="text-2xl font-bold text-red-600 mb-9 ml-40">Add Users and Trainers</h2>
       <h2  v-else class="text-2xl font-bold text-red-600 mb-9 ml-40">Edit Users and Trainers</h2>
       
       <div class="overflow-x-auto">
       <div v-if="showform==false" >
+          <!-- Button to show the form for creating a new entry -->
         <button @click="showform = true" class="bg-green-500 text-white px-4 py-2 mt-4 rounded">Create New Entry</button>
-
+        <!-- Table displaying the list of users and trainers -->
         <table class="min-w-full bg-white">
           <thead>
             <tr>
@@ -35,6 +37,7 @@
       </div>
 
 <div v-else>
+    <!-- Form for creating or editing an entry -->
  
 <form @submit.prevent=" editting ? edituser():  createItem()" class="max-w-sm mx-auto">
   <div class="mb-5">
@@ -72,11 +75,13 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
   import { Head } from '@inertiajs/vue3';
 import axios from 'axios';
 
+// Fetch users and roles when the component is mounted
   onMounted(async()=>{
     await fetchusers();
 
     await fetchroles();
   })
+  // Variables and states
     const data = ref([ ]);
 
     const roles = ref([ ]);
@@ -89,7 +94,7 @@ import axios from 'axios';
 
 
 
-
+// Method to create a new user
     const createItem = async () => {
       try{
         const dataFetched = await axios.post('http://cyfit.test:8000/api/users',{name:name.value, email:email.value, role_id:role_id.value});
@@ -106,22 +111,25 @@ import axios from 'axios';
 
       
     };
+    // Method to set up editing a user
 
     const editItem = (item) => {
+      // Find the index of the item to be edited in the data array using its id
       const index = data.value.findIndex(i => i.id === item.id);
+      // Check if the item exists in the array
       if (index !== -1) {
-    
+         // Set the form fields with the item's current values
         name.value = item.name
         email.value = item.email
-        
         role_id.value = item.role_id
+         // Set the editing state to true and store the item's id
         editting.value = true
         userid.value = item.id
-        
-         showform.value = true       
+          // Show the form for editing
+        showform.value = true       
       }
     };
-
+// Method to hide the form and reset states
     const hideform = () => {
       name.value = null
         email.value = null
